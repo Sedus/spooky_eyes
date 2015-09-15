@@ -17,13 +17,13 @@ https://www.arduino.cc/en/Guide/ArduinoMini
 The first attempt gave me the same error as before, but then I tried something by accident...
 
 Summary:
-1. GRN -> GRN
-2. PWR -> PWR
-3. RX -> TX
-4. TX -> RX
-5. Reset -> Reset
-6. !!! remove the reset pin when avrdude is trying to upload the code !!!
-7. done
+  1. GRN -> GRN
+  2. PWR -> PWR
+  3. RX -> TX
+  4. TX -> RX
+  5. Reset -> Reset
+  6. !!! remove the reset pin when avrdude is trying to upload the code !!!
+  7. done
 
 Now the Arduino is programmed!
 
@@ -31,20 +31,20 @@ Now the Arduino is programmed!
 
 These are the materials I used to create one set of eyes:
 
-2x 10mm diffused red LEDs
-2x 150 Ohm resistors
-1x Adafruit Perma-Proto Quarter-sized Breadboard PCB
-1x Arduino Mini
-Some wires
+  - 2x 10mm diffused red LEDs
+  - 2x 150 Ohm resistors
+  - 1x Adafruit Perma-Proto Quarter-sized Breadboard PCB
+  - 1x Arduino Mini
+  - Some wires
 
-I sawed the Perma-Proto breadboard into two pieces. One for each eye.
+I carefully sawed the Perma-Proto breadboard into two pieces. One for each eye.
 
 ## Eye effects
 
 The code I wrote can let the eyes do the following effects:
 
-- The eyes can open (fade in);
-- The eyes can close (fade out);
-- When open, the eyes blink every 10-15 seconds;
-- The eyes can go crazy (flicker) once in a while
-- Since everything has to fit inside the helmet I've used an arduino mini which will be powered by a 9V battery.
+  - The eyes can open (fade in);
+  - The eyes can close (fade out);
+  - When open, the eyes blink every 10-15 seconds;
+  - The eyes can go crazy (flicker) once in a while
+  - Since everything has to fit inside the helmet I've used an arduino mini which will be powered by a 9V battery.
