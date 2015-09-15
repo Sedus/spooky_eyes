@@ -35,6 +35,8 @@ These are the materials I used to create one set of eyes:
   - 2x 150 Ohm resistors
   - 1x Adafruit Perma-Proto Quarter-sized Breadboard PCB
   - 1x Arduino Mini
+  - 1x 9V Battery Adapter
+  - 1x 9V Battery
   - Some wires
 
 I carefully sawed the Perma-Proto breadboard into two pieces. One for each eye.
@@ -47,4 +49,4 @@ The code I wrote can let the eyes do the following effects:
   - The eyes can close (fade out);
   - When open, the eyes blink every 10-15 seconds;
   - The eyes can go crazy (flicker) once in a while
-  - Since everything has to fit inside the helmet I've used an arduino mini which will be powered by a 9V battery.
+  
