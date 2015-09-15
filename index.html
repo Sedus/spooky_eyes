@@ -1,63 +1,94 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Arduino Spooky Eyes by Sedus</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/Sedus/spooky_eyes">View On GitHub</a></li>
-        </nav>
-      </div><!-- end header -->
+    <section class="page-header">
+      <h1 class="project-name">Arduino Spooky Eyes</h1>
+      <h2 class="project-tagline">Spooky eyes with Arduino</h2>
+      <a href="https://github.com/Sedus/spooky_eyes" class="btn">View on GitHub</a>
+      <a href="https://github.com/Sedus/spooky_eyes/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Sedus/spooky_eyes/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Spooky Eyes</h1>
-          <p>Having fun with an Arduino</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/Sedus">Sedus</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="spooky-eyes" class="anchor" href="#spooky-eyes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spooky Eyes</h1>
 
-<p>This lttile project is about having fun with an Arduino. For my daughters spooky birthday party (or Halloween if you want), I wanted to create a special effect. Some years ago my wife bought me an iron helmet which stands on a wooden stick. Wouldn't it be awesome to make the helmet come alive with a couple of demon eyes?
-</p>
-<p>
-For the eyes I used 2x 10mm diffused red LEDs which are controlled by an Arduino.
-</p>
+<p>This lttile project is about having fun with an Arduino. For my daughters spooky birthday party (or Halloween if you want), I wanted to create a special effect. Some years ago my wife bought me an iron helmet which stands on a wooden stick. Wouldn't it be awesome to make the helmet come alive with two demonic eyes?</p>
 
-<p>So far I have the following effects created:</p>
+<h2>
+<a id="uploading-code-to-the-arduino-mini" class="anchor" href="#uploading-code-to-the-arduino-mini" aria-hidden="true"><span class="octicon octicon-link"></span></a>Uploading code to the Arduino mini</h2>
+
+<p>The Arduino mini does not have a build in USB connector, so we need another way to upload
+code to it. I tried a PL2303TA USB to Serial Bridge Controller, but that didn't work
+(I heard the cable delivers 3V power while the Mini needs 5V). Everything I tried resulted in this error:</p>
+
+<p>avrdude: stk500_getsync(): not in sync: resp=0x00</p>
+
+<p>So, I switched to a USB serial adapter (<a href="https://www.arduino.cc/en/Main/USBSerial">https://www.arduino.cc/en/Main/USBSerial</a>).
+Read the following page for instructions:
+<a href="https://www.arduino.cc/en/Guide/ArduinoMini">https://www.arduino.cc/en/Guide/ArduinoMini</a></p>
+
+<p>The first attempt gave me the same error as before, but then I tried something by accident...</p>
+
+<p>Summary:</p>
+
+<ol>
+<li>GRN -&gt; GRN</li>
+<li>PWR -&gt; PWR</li>
+<li>RX -&gt; TX</li>
+<li>TX -&gt; RX</li>
+<li>Reset -&gt; Reset</li>
+<li>!!! remove the reset pin when avrdude is trying to upload the code !!!</li>
+<li>done</li>
+</ol>
+
+<p>Now the Arduino is programmed!</p>
+
+<h2>
+<a id="materials" class="anchor" href="#materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials</h2>
+
+<p>These are the materials I used to create one set of eyes:</p>
+
+<ul>
+<li>2x 10mm diffused red LEDs</li>
+<li>2x 150 Ohm resistors</li>
+<li>1x Adafruit Perma-Proto Quarter-sized Breadboard PCB</li>
+<li>1x Arduino Mini</li>
+<li>Some wires</li>
+</ul>
+
+<p>I carefully sawed the Perma-Proto breadboard into two pieces. One for each eye.</p>
+
+<h2>
+<a id="eye-effects" class="anchor" href="#eye-effects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Eye effects</h2>
+
+<p>The code I wrote can let the eyes do the following effects:</p>
 
 <ul>
 <li>The eyes can open (fade in);</li>
 <li>The eyes can close (fade out);</li>
 <li>When open, the eyes blink every 10-15 seconds;</li>
 <li>The eyes can go crazy (flicker) once in a while</li>
+<li>Since everything has to fit inside the helmet I've used an arduino mini which will be powered by a 9V battery.</li>
 </ul>
 
-<p>Since everything has to fit inside the helmet I've used an arduino mini which will be powered by a 9V battery.</p>
-      </section>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Sedus/spooky_eyes">Arduino Spooky Eyes</a> is maintained by <a href="https://github.com/Sedus">Sedus</a>.</span>
 
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
