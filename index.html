@@ -23,7 +23,8 @@
 </script>
 
     <section class="page-header">
-      <img src="images/result.jpg" class="header-img"/>
+      <img src="images/skull-result.jpg" class="header-img-left"/>
+      <img src="images/result.jpg" class="header-img-right"/>
       <h1 class="project-name">Arduino Spooky Eyes</h1>
       <h2 class="project-tagline">Spooky eyes with Arduino</h2>
       <a href="https://github.com/Sedus/spooky_eyes" class="btn">View on GitHub</a>
@@ -33,7 +34,38 @@
       <h1>
 <a id="spooky-eyes" class="anchor" href="#spooky-eyes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spooky Eyes</h1>
 
-<p>This lttile project is about having fun with an Arduino. For my daughters spooky birthday party (or Halloween if you want), I wanted to create a special effect. Some years ago my wife bought me an iron helmet which stands on a wooden stick. Wouldn't it be awesome to make the helmet come alive with two demonic eyes?</p>
+<p>
+  This lttile project is about having fun with an Arduino.
+  For my daughters spooky birthday party (or Halloween if you want),
+  I wanted to something special.
+  Some years ago my wife bought me an iron helmet on a wooden stand.
+  Wouldn't it be awesome to make the helmet come alive with two demonic eyes?
+  We also bought a styrofoam skull. Now, I can make two demons ;) Here's what I
+  did...
+</p>
+
+<h2>
+<a id="materials" class="anchor" href="#materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials</h2>
+
+<p>These are the materials I used to create <b>one</b> set of eyes:</p>
+
+<ul>
+<li>2x 10mm diffused red LEDs</li>
+<li>2x 150 Ohm resistors</li>
+<li>1x Adafruit Perma-Proto Quarter-sized Breadboard PCB</li>
+<li>1x Arduino Mini</li>
+<li>1x 9V Battery Adapter</li>
+<li>1x 9V Battery</li>
+<li>Some wires</li>
+</ul>
+
+<p>I carefully sawed the Perma-Proto breadboard into two pieces.</p>
+
+<h2>
+<a id="arduino-code" class="anchor" href="#arduino-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arduino code</h2>
+<p>
+  <a href="https://github.com/Sedus/spooky_eyes/blob/master/spooky_eyes.ino">See spooky_eyes.ino on GitHub</a>
+</P>
 
 <h2>
 <a id="uploading-code-to-the-arduino-mini" class="anchor" href="#uploading-code-to-the-arduino-mini" aria-hidden="true"><span class="octicon octicon-link"></span></a>Uploading code to the Arduino mini</h2>
@@ -48,7 +80,7 @@ code to it. I tried a PL2303TA USB to Serial Bridge Controller, but that didn't 
 Read the following page for instructions:
 <a href="https://www.arduino.cc/en/Guide/ArduinoMini">https://www.arduino.cc/en/Guide/ArduinoMini</a></p>
 
-<p>The first attempt gave me the same error as before, but then I tried something by accident...</p>
+<p>The first attempt gave me the same error as before, but then I removed the reset pin by accident...</p>
 
 <p>Summary:</p>
 
@@ -65,23 +97,6 @@ Read the following page for instructions:
 <p>Now the Arduino is programmed!</p>
 
 <h2>
-<a id="materials" class="anchor" href="#materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials</h2>
-
-<p>These are the materials I used to create one set of eyes:</p>
-
-<ul>
-<li>2x 10mm diffused red LEDs</li>
-<li>2x 150 Ohm resistors</li>
-<li>1x Adafruit Perma-Proto Quarter-sized Breadboard PCB</li>
-<li>1x Arduino Mini</li>
-<li>1x 9V Battery Adapter</li>
-<li>1x 9V Battery</li>
-<li>Some wires</li>
-</ul>
-
-<p>I carefully sawed the Perma-Proto breadboard into two pieces. One for each eye.</p>
-
-<h2>
 <a id="eye-effects" class="anchor" href="#eye-effects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Eye effects</h2>
 
 <p>The code I wrote can let the eyes do the following effects:</p>
@@ -93,52 +108,17 @@ Read the following page for instructions:
 <li>The eyes can go crazy (flicker) once in a while</li>
 </ul>
 
-<h2>Images</h2>
+<h2>
+<a id="helmet-page" class="anchor" href="#helmet-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Helmet</h2>
+<p>
+  Pictures from the <a href="helmet.html">helmet project</a>.
+</p>
 
-<div id="w2" class="wrap">
-  <div class="col-left">
-    <div class="imageHolder">
-      <img src="images/front-perma.jpg"/>
-      <div class="caption"><br>Front after soldering</div>
-    </div>
-    <div class="imageHolder">
-      <img src="images/soldered.jpg"/>
-      <div class="caption"><br>Both eyes soldered</div>
-    </div>
-    <div class="imageHolder">
-      <img src="images/taped-to-back.jpg"/>
-      <div class="caption"><br>Taped to the back</div>
-    </div>
-  </div>
-
-  <div class="col-right" >
-    <div class="imageHolder">
-      <img src="images/back-perma.jpg"/>
-      <div class="caption"><br>Back after soldering</div>
-   </div>
-   <div class="imageHolder">
-     <img src="images/cardboard-painted.jpg"/>
-     <div class="caption"><br>Painted with LEDs</div>
-    </div>
-  </div>
-</div>
-
-<div id="w1" class="wrap">
-  <div class="col-left">
-    <div class="imageHolder">
-      <img src="images/result.jpg"/>
-      <div class="caption"><br>Pretty spooky, isn't it?</div>
-    </div>
-  </div>
-  <div class="col-right" >
-    <div>
-      <video controls>
-      <source src="images/result.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
-</div>
+<h2>
+<a id="skull-page" class="anchor" href="#skull-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Skull</h2>
+<p>
+  Pictures from the <a href="skull.html">skull project</a>.
+</p>
 
   </section>
 
