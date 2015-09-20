@@ -5,13 +5,14 @@ This lttile project is about having fun with an Arduino. For my daughters spooky
 
 These are the materials I used to create one set of eyes:
 
-2x 10mm diffused red LEDs
-2x 150 Ohm resistors
-1x Adafruit Perma-Proto Quarter-sized Breadboard PCB
-1x Arduino Mini
-1x 9V Battery Adapter
-1x 9V Battery
-Some wires
+- 2x 10mm diffused red LEDs
+- 2x 150 Ohm resistors
+- 1x Adafruit Perma-Proto Quarter-sized Breadboard PCB
+- 1x Arduino Mini
+- 1x 9V Battery Adapter
+- 1x 9V Battery
+- Some wires
+
 I carefully sawed the Perma-Proto breadboard into two pieces.
 
 ## Arduino code
@@ -30,20 +31,21 @@ The first attempt gave me the same error as before, but then I removed the reset
 
 Summary:
 
-GRN -> GRN
-PWR -> PWR
-RX -> TX
-TX -> RX
-Reset -> Reset
-!!! remove the reset pin when avrdude is trying to upload the code !!!
-done
+- GRN -> GRN
+- PWR -> PWR
+- RX -> TX
+- TX -> RX
+- Reset -> Reset
+- !!! remove the reset pin when avrdude is trying to upload the code !!!
+- done
+
 Now the Arduino is programmed!
 
 ## Eye effects
 
 The code I wrote can let the eyes do the following effects:
 
-The eyes can open (fade in);
-The eyes can close (fade out);
-When open, the eyes blink every 10-15 seconds;
-The eyes can go crazy (flicker) once in a while
+- The eyes can open (fade in);
+- The eyes can close (fade out);
+- When open, the eyes blink every 10-15 seconds;
+- The eyes can go crazy (flicker) once in a while
