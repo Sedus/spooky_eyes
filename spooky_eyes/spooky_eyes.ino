@@ -3,8 +3,8 @@ const int rightEyePin = 10;
 
 long startTimeEffect = 0;
 
-const int minEffectTime = 1 * 60000; // Minimum duration of effect
-const int maxEffectTime = 5 * 60000; // Maximum duration of effect
+const int minEffectTime = 1 * 30000; // Minimum duration of effect
+const int maxEffectTime = 6 * 30000; // Maximum duration of effect
 
 // Eyes status
 const String OPEN = "OPEN";
@@ -19,27 +19,30 @@ long lastBlinkTime = millis();
 long nextBlinkTime = random(minBlinkTime, maxBlinkTime);
 
 // Flickering
-const int MAX_FLICK_TIME = 20000; // Maximum ms flickering may occur
+const int MAX_FLICK_TIME = 10000; // Maximum ms flickering may occur
 
 // Weighted effects (sum must be 100)
 // _NR must correspond to the index in the array!!!
 const int STARING_WEIGHT = 50;
 const int STARING_NR = 0;
 
-const int SLEEPING_WEIGHT = 35;
+const int SLEEPING_WEIGHT = 20;
 const int SLEEPING_NR = 1;
 
-const int FLICKERING_WEIGHT = 15;
-const int FLICKERING_NR = 2;
+const int WINKING_WEIGHT = 15;
+const int WINKING_NR = 2;
 
-const int EFFECTS[] = {STARING_WEIGHT, SLEEPING_WEIGHT, FLICKERING_WEIGHT};
-const int EFFECT_COUNT = 3; // length of array
+const int FLICKERING_WEIGHT = 15;
+const int FLICKERING_NR = 3;
+
+const int EFFECTS[] = {STARING_WEIGHT, SLEEPING_WEIGHT, WINKING_WEIGHT, FLICKERING_WEIGHT};
+const int EFFECT_COUNT = 4; // length of array
 int activeEffect;
 
 void setup() {
   Serial.begin(115200);
   randomSeed(analogRead(0));
-//  delay(5000);
+  delay(5000);
   stare();
 }
 
@@ -56,6 +59,7 @@ void loop() {
     switch (newEffect) {
       case STARING_NR: stare(); break;
       case SLEEPING_NR: sleep(); break;
+      case WINKING_NR: wink(MAX_FLICK_TIME); break;
       case FLICKERING_NR: flicker(MAX_FLICK_TIME); break;
     }
   }
@@ -73,25 +77,43 @@ int getEffect() {
   }
 }
 
-void closeEyes(int ms, int steps) {
+void closeEyes(int ms, int steps, boolean left, boolean right) {
   Serial.println("Closing eyes");
   for (int fadeValue = 255 ; fadeValue >= 0; fadeValue -= steps) {
-    analogWrite(leftEyePin, fadeValue);
-    analogWrite(rightEyePin, fadeValue);
+    if (left) {
+      analogWrite(leftEyePin, fadeValue);
+    }
+    if (right) {
+      analogWrite(rightEyePin, fadeValue);
+    }
     delay(ms);
+  }
+  if (left) {
+    analogWrite(leftEyePin, 0);
+  }
+  if (right) {
+    analogWrite(rightEyePin, 0);
   }
   status = CLOSED;
 }
 
-void openEyes(int ms, int steps) {
+void openEyes(int ms, int steps, boolean left, boolean right) {
   Serial.println("Opening eyes");
   for (int fadeValue = 0 ; fadeValue <= 255; fadeValue += steps) {
-    analogWrite(leftEyePin, fadeValue);
-    analogWrite(rightEyePin, fadeValue);
+    if (left) {
+      analogWrite(leftEyePin, fadeValue);
+    }
+    if (right) {
+      analogWrite(rightEyePin, fadeValue);
+    }
     delay(ms);
   }
-  analogWrite(leftEyePin, 255);
-  analogWrite(rightEyePin, 255);
+  if (left) {
+    analogWrite(leftEyePin, 255);
+  }
+  if (right) {
+    analogWrite(rightEyePin, 255);
+  }
   status = OPEN;
 }
 
@@ -104,14 +126,14 @@ void stare() {
   if (status == CLOSED) {
     // Wakeup dramatically
     for (int i = 0; i < 5; i++) {
-      openEyes(3*i, 50);
-      delay(30*i);
-      closeEyes(3*i, 50);
-      delay(30*i);
+      openEyes(3 * i, 50, true, true);
+      delay(30 * i);
+      closeEyes(3 * i, 50, true, true);
+      delay(30 * i);
     }
-    lastBlinkTime = millis();
-    openEyes(30, 5);
+    openEyes(30, 5, true, true);
   }
+  lastBlinkTime = millis();
   activeEffect = STARING_NR;
   Serial.println("-- EFFECT: Staring");
 }
@@ -123,7 +145,7 @@ void stare() {
 */
 void sleep() {
   if (status == OPEN) {
-    closeEyes(30, 5);
+    closeEyes(30, 5, true, true);
   }
   activeEffect = SLEEPING_NR;
   Serial.println("-- EFFECT: Sleeping");
@@ -136,7 +158,7 @@ void sleep() {
 */
 void flicker(long duration) {
   if (status = CLOSED) {
-    openEyes(10, 15);
+    openEyes(10, 15, true, true);
   }
   activeEffect = FLICKERING_NR;
   Serial.println("-- EFFECT: Flickering");
@@ -152,6 +174,7 @@ void flicker(long duration) {
     delay(100);
   }
   doBlink(3);
+  Serial.println("-- EFFECT: Flickering ended after " + (String)duration + " ms");
   delay(250);
   sleep();
 }
@@ -161,9 +184,25 @@ void doBlink(int times) {
   lastBlinkTime = millis();
   for (int i = 0; i < times; i++) {
     if (status == OPEN) {
-      closeEyes(10, 15);
+      closeEyes(10, 15, true, true);
       delay(500);
-      openEyes(10, 15);
+      openEyes(10, 15, true, true);
     }
   }
 }
+
+void wink(int duration) {
+  activeEffect = WINKING_NR;
+  Serial.println("-- EFFECT: wink");
+  while (millis() - startTimeEffect <= duration) {
+    closeEyes(10, 15, true, false);
+    delay(250);
+    openEyes(10, 15, true, false);
+    delay(500);
+    closeEyes(10, 15, false, true);
+    delay(250);
+    openEyes(10, 15, false, true);
+  }
+  stare();
+}
+
